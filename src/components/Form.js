@@ -38,7 +38,7 @@ export default function Form(props) {
     function copyClick() {
         let copy = document.getElementById("myBox")
         copy.select() // selects the text(usually the blue highlighting)
-        navigator.clipboard.writeText("copy.value") // executing Ctrl+C command
+        navigator.clipboard.writeText(copy.value) // executing Ctrl+C command
         props.showAlert("Text copied!", "Success")
         // try {
         // }
