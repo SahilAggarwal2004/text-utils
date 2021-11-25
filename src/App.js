@@ -52,6 +52,12 @@ function App() {
           </Switch>
         </div>
       </Router>
+      <Navbar title="Text-Utils" mode={mode} toggleMode={toggleMode} theme={theme} setTheme={setTheme} />
+      <Alert alert={alert} />
+      <div className="container">
+        <Form heading="Enter the text to analyze" mode={mode} showAlert={showAlert} theme={theme} />
+        <About mode={mode} />
+      </div>
     </div >
   );
 }
