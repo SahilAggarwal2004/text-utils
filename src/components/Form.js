@@ -36,15 +36,11 @@ export default function Form(props) {
         props.showAlert("Extra spaces removed!", "Success")
     }
     function copyClick() {
-        let copy = document.getElementById("myBox")
-        copy.select() // selects the text(usually the blue highlighting)
-        navigator.clipboard.writeText(copy.value) // executing Ctrl+C command
+        // copy.select() // selects the text(usually the blue highlighting)
+        navigator.clipboard.writeText(text) // executing Ctrl+C command
+        // document.getSelection().removeAllRanges() // deselects the text
+        // Using the navigator, we don't need to select and deselect text
         props.showAlert("Text copied!", "Success")
-        // try {
-        // }
-        // catch {
-        //     props.showAlert("Some error occured. Try again!", "Warning")
-        // }
     }
     function clearClick() {
         setText('')
@@ -61,23 +57,24 @@ export default function Form(props) {
                 <div className="mb-3 my-3">
                     <textarea className={`form-control bg-${props.mode === "light" ? "white" : "dark"} text-${props.mode === "light" ? "dark" : "light"}`} id="myBox" rows="8" placeholder="Enter Text Here" value={text} onChange={change}></textarea>
                 </div>
-                <button className={`btn btn-${props.theme} m-2`} onClick={upClick}>Convert to Uppercase</button>
-                <button className={`btn btn-${props.theme} m-2`} onClick={lowClick}>Convert to Lowercase</button>
-                <button className={`btn btn-${props.theme} m-2`} onClick={mailClick}>Extract Mail</button>
-                <button className={`btn btn-${props.theme} m-2`} onClick={removeClick}>Remove Extra Spaces</button>
-                <button className={`btn btn-${props.theme} m-2`} onClick={copyClick}>Copy Text</button>
-                <button className={`btn btn-${props.theme} m-2`} onClick={clearClick}>Clear Text</button>
+                {/* disabled attribute can be used to disable xml tag (only disabled to be written for permanent disability and if we want to add a condition, we can put the condition using '=' and then the condition as below) */}
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} m-2`} onClick={upClick}>Convert to Uppercase</button>
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} m-2`} onClick={lowClick}>Convert to Lowercase</button>
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} m-2`} onClick={mailClick}>Extract Mail</button>
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} m-2`} onClick={removeClick}>Remove Extra Spaces</button>
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} m-2`} onClick={copyClick}>Copy Text</button>
+                <button disabled={text.length === 0} className={`btn btn-${props.theme} m-2`} onClick={clearClick}>Clear Text</button>
             </div>
 
             <div className="container mb-3 my-3 border p-3">
                 <h4>Text summary</h4>
                 <div className="mb-3 my-3">
                     {text.length} characters, {
-                        (text.split(" ").filter(ele => {
+                        (text.split(/\s+/).filter(ele => {
                             return ele !== '';
                         }).length)
                     } words, {
-                        Math.floor(text.split(" ").filter(ele => {
+                        Math.floor(text.split(/\s+/).filter(ele => {
                             return ele !== '';
                         }).length * 60 / 125)
                     } seconds read

@@ -13,3 +13,7 @@
 .accordion-item {
     border-radius: 0.25rem;
 }
+
+.accordion-button::after { /* in bootstrap, the arrow of accordian button is present in ::after */
+    filter: invert(1);
+}
