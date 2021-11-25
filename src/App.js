@@ -3,17 +3,18 @@ import './App.css';
 import Navbar from './components/Navbar'
 import Alert from './components/Alert'
 import Form from './components/Form'
+import About from './components/About'
 
 function App() {
 
   const [mode, setMode] = useState("light");
-  const [alert, setAlert] = useState(null);
+  const [alert, setAlert] = useState({ msg: null, type: "" });
   const [theme, setTheme] = useState("primary");
 
   function showAlert(message, type) {
     setAlert({ msg: message, type: type });
     setTimeout(() => {
-      setAlert(null)
+      setAlert({ msg: null, type: "" })
     }, 1500);
   }
 
@@ -37,6 +38,7 @@ function App() {
       <Alert alert={alert} />
       <div className="container">
         <Form heading="Enter the text to analyze" mode={mode} showAlert={showAlert} theme={theme} />
+        <About mode={mode} />
       </div>
     </div >
   );
