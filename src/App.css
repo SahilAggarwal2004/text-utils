@@ -1,9 +1,11 @@
 .no-out:focus {
+    /* :focus is for event when <select> is open */
     outline: none;
     box-shadow: none;
 }
 
 .no-out:checked {
+    /* :checked is for event when input checkbox is open */
     outline: none;
     box-shadow: none;
 }

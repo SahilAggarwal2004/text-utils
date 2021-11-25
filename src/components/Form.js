@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState } from 'react'; // importing useState from react which is a hook(it lets us use state and other class features without a class, i.e., with functions), useState is actually a function only.
 
 export default function Form(props) {
-    const [text, setText] = useState("");
+    const [text, setText] = useState(""); // must be used inside the respective function anywhere before return
+    // const [state(current), setstate(function to update state)] = useState(initialState);
+    // Now usestate() returns an array with a state and a updation function which will update the state of a component and update it at every place where it was being used/will be used without reloading the page, this is better than changing variable value as it won't update the values of variable where it was already used and will update only where it will be used in future
+
+    // Now useState gave some initial value to text, and now we can update text using setText function by setText(newState) and as soon as we use this function, the value of text will be updated everywhere it was being used/will be used.
 
     const [result, setResult] = useState([])
 
@@ -15,7 +19,7 @@ export default function Form(props) {
     }
     function mailClick() {
         let mailList = []
-        text.split(/(?: |\n)/).filter(element => {
+        text.split(/(?: |\n)/).filter(element => { // both space and new-line are separators
             if (element.indexOf('.') - element.indexOf("@") > 1) {
                 mailList.push(element)
             }
@@ -26,7 +30,7 @@ export default function Form(props) {
         mailList.length > 0 ? props.showAlert("Mails extracted!", "Success") : props.showAlert("No mails available!", "Warning")
     }
     function removeClick() {
-        let extra = text.split(/[ ]+/)
+        let extra = text.split(/[ ]+/) // spitting text if one or more spaces
         extra = extra.join(" ")
         setText(extra)
         props.showAlert("Extra spaces removed!", "Success")
@@ -36,15 +40,14 @@ export default function Form(props) {
         navigator.clipboard.writeText(text) // executing Ctrl+C command
         // document.getSelection().removeAllRanges() // deselects the text
         // Using the navigator, we don't need to select and deselect text
-        navigator.clipboard.writeText(text)
         props.showAlert("Text copied!", "Success")
     }
     function clearClick() {
         setText('')
         props.showAlert("Text cleared!", "Success")
     }
-    function change(event) {
-        setText(event.target.value);
+    function change(event) { // onChange passes an event parameter by default
+        setText(event.target.value); // event.target.value gives the updated value after the event occurs
     }
 
     return (
@@ -80,6 +83,7 @@ export default function Form(props) {
 
             <div className="container mb-3 my-3 border p-3">
                 <h4>Result</h4>
+                {/* array.map() discussed in loops in js (map worked here instead of forEach as we wanted to return the html) */}
                 {result.map((data) => {
                     return (result.length > 1 ? <li id="myResult" type="1" className="mb-3 my-3">{data}</li> : <div id="myResult" className="mb-3 my-3">{data}</div>)
                 })}
