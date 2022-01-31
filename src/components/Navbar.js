@@ -15,7 +15,7 @@ export default function Navbar(props) {
                             <Link className="nav-link" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" aria-current="page" to="/about">About Us</Link>
+                            <Link className="nav-link" aria-current="page" to="/about">About</Link>
                         </li>
                     </ul>
                     {/* Since we can't pass a function call in onChange(which is an event listener) and must pass a function there, we will pass an arrow function which calls our setTheme function with given parameter */}

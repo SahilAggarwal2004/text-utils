@@ -1,6 +1,9 @@
 import { useState } from 'react'; // importing useState from react which is a hook(it lets us use state and other class features without a class, i.e., with functions), useState is actually a function only.
 
 export default function Form(props) {
+
+    var count = 0;
+
     const [text, setText] = useState(""); // must be used inside the respective function anywhere before return
     // const [state(current), setstate(function to update state)] = useState(initialState);
     // Now usestate() returns an array with a state and a updation function which will update the state of a component and update it at every place where it was being used/will be used without reloading the page, this is better than changing variable value as it won't update the values of variable where it was already used and will update only where it will be used in future
@@ -27,6 +30,7 @@ export default function Form(props) {
         })
         mailList = [...new Set(mailList)]
         setResult(mailList)
+        count = 0;
         mailList.length > 0 ? props.showAlert("Mails extracted!", "Success") : props.showAlert("No mails available!", "Warning")
     }
     function removeClick() {
@@ -84,8 +88,10 @@ export default function Form(props) {
             <div className="container mb-3 my-3 border p-3">
                 <h4>Result</h4>
                 {/* array.map() discussed in loops in js (map worked here instead of forEach as we wanted to return the html) */}
+                {/* since we are using map() and multiple divs are being rendered, thus each div should have a unique key to identify it among other divs (key is similar to id but for map(), key is used instead of id to identify a tag). It uniquely identifies tags not only for map() but also in different situations(discussed in newsapp) */}
                 {result.map((data) => {
-                    return (result.length > 1 ? <li id="myResult" type="1" className="mb-3 my-3">{data}</li> : <div id="myResult" className="mb-3 my-3">{data}</div>)
+                    // here we are updating count for every iteration and hence, every div has unique key
+                    return (result.length > 1 ? <li key={`${count++}`} id="myResult" type="1" className="mb-3 my-3">{data}</li> : <div id="myResult" className="mb-3 my-3">{data}</div>)
                 })}
             </div>
         </>
