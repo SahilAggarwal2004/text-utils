@@ -1,18 +1,17 @@
 import { useState } from "react";
-import './App.css';
-import Navbar from './components/Navbar'
-import Alert from './components/Alert'
-import Form from './components/Form'
-import About from './components/About'
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Alert from "./components/Alert";
+import Form from "./components/Form";
+import About from "./components/About";
 import {
   HashRouter as Router, // a container for Routes(Switch), Route and Link to pack and link all tags to each other
   Routes as Switch, // a container for Route
-  Route // accepts path attribute as url of webpage and element as component to get blitted and routes it to that element
+  Route, // accepts path attribute as url of webpage and element as component to get blitted and routes it to that element
   // Link // we will use it in navbar as navbar contains the button using which we want to link our components to routes. to attribute in <Link> contains the url which we want to access. Now it may appear similar to anchor tag (<a href="url">) but it is different as it switches to that particular link without reloading the page(unlike <a>)
-} from "react-router-dom"
+} from "react-router-dom";
 
 function App() {
-
   const [mode, setMode] = useState("light");
   const [alert, setAlert] = useState({ msg: null, type: "" });
   const [theme, setTheme] = useState("primary");
@@ -20,19 +19,18 @@ function App() {
   function showAlert(message, type) {
     setAlert({ msg: message, type: type });
     setTimeout(() => {
-      setAlert({ msg: null, type: "" })
+      setAlert({ msg: null, type: "" });
     }, 1500);
   }
 
   function toggleMode() {
     if (mode === "light") {
-      setMode("dark")
-      showAlert("Dark Mode Enabled!", "Success")
+      setMode("dark");
+      showAlert("Dark Mode Enabled!", "Success");
       document.querySelector("html").style.backgroundColor = "#212529";
-    }
-    else {
-      setMode("light")
-      showAlert("Light Mode Enabled!", "Success")
+    } else {
+      setMode("light");
+      showAlert("Light Mode Enabled!", "Success");
       document.querySelector("html").style.backgroundColor = "white";
     }
     setTheme(theme);
@@ -52,7 +50,7 @@ function App() {
           </Switch>
         </div>
       </Router>
-    </div >
+    </div>
   );
 }
 
